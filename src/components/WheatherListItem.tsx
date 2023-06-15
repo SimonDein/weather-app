@@ -8,6 +8,12 @@ interface WheatherListItemProps {
   currentTemperature: number;
 }
 
+const temparatureFormatter = new Intl.NumberFormat("no-NO", {
+  style: "unit",
+  unit: "celsius",
+  maximumFractionDigits: 0,
+});
+
 export function WheatherListItem({
   locationName,
   currentTemperature,
@@ -15,7 +21,7 @@ export function WheatherListItem({
   return (
     <li className="flex justify-between">
       <span>{locationName}</span>
-      <span>{currentTemperature}</span>
+      <span>{temparatureFormatter.format(currentTemperature)}</span>
     </li>
   );
 }
