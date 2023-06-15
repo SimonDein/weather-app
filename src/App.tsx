@@ -10,7 +10,7 @@ function App() {
       zipCode: undefined,
     },
     {
-      name: "London",
+      name: "Nuuk",
       coordinates: undefined,
       zipCode: undefined,
     },
