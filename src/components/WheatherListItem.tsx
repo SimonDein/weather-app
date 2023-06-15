@@ -19,25 +19,38 @@ export function WheatherListItem({
   currentTemperature,
 }: WheatherListItemProps) {
   return (
-    <li className="flex justify-between">
+    <li className="flex px-2 py-4 bg-slate-900 rounded-md justify-between">
       <span>{locationName}</span>
       <span>{temparatureFormatter.format(currentTemperature)}</span>
     </li>
   );
 }
 
+async function getWeatherForLocation(location: Location) {
+  if (location.coordinates !== undefined) {
+    return openWeather.getCurrentWeatherByGeoCoordinates(
+      location.coordinates?.latitude,
+      location.coordinates?.longitude
+    );
+  }
+  if (location.zipCode !== undefined) {
+    return openWeather.getCurrentWeatherByZipcode(location.zipCode);
+  }
+
+  if (location.name !== undefined) {
+    return openWeather.getCurrentWeatherByCityName({ cityName: location.name });
+  }
+}
+
 function useCurrentWeatherDataForLocation(location: Location) {
-  const [data, setData] = useState<CurrentResponse | null>(null);
+  const [data, setData] = useState<CurrentResponse | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
   async function fetchData() {
     try {
       setIsLoading(true);
-      const weather = await openWeather.getCurrentWeatherByGeoCoordinates(
-        location?.coordinates?.latitude,
-        location?.coordinates?.longitude
-      );
+      const weather = await getWeatherForLocation(location);
       setData(weather);
     } catch (e) {
       console.log(e);
@@ -57,15 +70,12 @@ function useCurrentWeatherDataForLocation(location: Location) {
 export function ConnectedWeatherListItem({ location }: { location: Location }) {
   const { data } = useCurrentWeatherDataForLocation(location);
   console.log(data);
-  const currentTemperature = data?.main.temp ?? 0;
+  const currentTemperature = data?.main?.temp ?? 0;
 
   return (
-    <>
-      <WheatherListItem
-        locationName={location.name}
-        currentTemperature={currentTemperature}
-      />
-      <span>{location.coordinates?.latitude}</span>
-    </>
+    <WheatherListItem
+      locationName={location.name}
+      currentTemperature={currentTemperature}
+    />
   );
 }
