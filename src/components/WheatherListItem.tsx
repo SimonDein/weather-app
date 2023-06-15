@@ -4,6 +4,7 @@ import { openWeather } from "../utils/openWeatherAPI.ts";
 import { CurrentResponse } from "openweathermap-ts/dist/types";
 
 interface WheatherListItemProps {
+  onClick: () => void;
   locationName: string;
   currentTemperature: number;
   windSpeed: number | undefined;
@@ -22,16 +23,24 @@ const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
 });
 
 export function WheatherListItem({
+  onClick,
   locationName,
   currentTemperature,
   windSpeed,
 }: WheatherListItemProps) {
+  const formattedWindSpeed = windSpeed
+    ? windSpeedFormatter.format(windSpeed)
+    : "/";
+
   return (
-    <li className="flex px-2 py-4 bg-slate-900 rounded-md justify-between">
+    <li
+      className="flex px-2 py-4 bg-slate-900 rounded-md justify-between"
+      onClick={onClick}
+    >
       <span>{locationName}</span>
       <div className="flex flex-col">
         <span>{temparatureFormatter.format(currentTemperature)}</span>
-        <span>{windSpeedFormatter.format(windSpeed)}</span>
+        <span>{formattedWindSpeed}</span>
       </div>
     </li>
   );
@@ -78,7 +87,13 @@ function useCurrentWeatherDataForLocation(location: Location) {
   return { data, isLoading, error };
 }
 
-export function ConnectedWeatherListItem({ location }: { location: Location }) {
+export function ConnectedWeatherListItem({
+  location,
+  onClick,
+}: {
+  location: Location;
+  onClick: () => void;
+}) {
   const { data } = useCurrentWeatherDataForLocation(location);
   console.log(data);
   const currentTemperature = data?.main?.temp ?? 0;
@@ -86,6 +101,7 @@ export function ConnectedWeatherListItem({ location }: { location: Location }) {
 
   return (
     <WheatherListItem
+      onClick={onClick}
       locationName={locationName}
       windSpeed={data?.wind?.speed}
       currentTemperature={currentTemperature}

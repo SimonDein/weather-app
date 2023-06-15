@@ -21,7 +21,11 @@ function App() {
       <h1 className="text-xl">Dashboard</h1>
       <ul className="flex flex-col gap-2">
         {locations.map((location, index) => (
-          <ConnectedWeatherListItem location={location} key={index} />
+          <ConnectedWeatherListItem
+            onClick={() => console.log(locations[index])}
+            location={location}
+            key={index}
+          />
         ))}
       </ul>
     </div>
