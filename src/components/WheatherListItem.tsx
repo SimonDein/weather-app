@@ -71,10 +71,11 @@ export function ConnectedWeatherListItem({ location }: { location: Location }) {
   const { data } = useCurrentWeatherDataForLocation(location);
   console.log(data);
   const currentTemperature = data?.main?.temp ?? 0;
+  const locationName = data?.name ?? location.name ?? "Unknown location";
 
   return (
     <WheatherListItem
-      locationName={location.name}
+      locationName={locationName}
       currentTemperature={currentTemperature}
     />
   );
