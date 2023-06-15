@@ -6,6 +6,7 @@ import { CurrentResponse } from "openweathermap-ts/dist/types";
 interface WheatherListItemProps {
   locationName: string;
   currentTemperature: number;
+  windSpeed: number | undefined;
 }
 
 const temparatureFormatter = new Intl.NumberFormat("no-NO", {
@@ -14,14 +15,24 @@ const temparatureFormatter = new Intl.NumberFormat("no-NO", {
   maximumFractionDigits: 0,
 });
 
+const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
+  unit: "meter-per-second",
+  maximumFractionDigits: 0,
+  style: "unit",
+});
+
 export function WheatherListItem({
   locationName,
   currentTemperature,
+  windSpeed,
 }: WheatherListItemProps) {
   return (
     <li className="flex px-2 py-4 bg-slate-900 rounded-md justify-between">
       <span>{locationName}</span>
-      <span>{temparatureFormatter.format(currentTemperature)}</span>
+      <div className="flex flex-col">
+        <span>{temparatureFormatter.format(currentTemperature)}</span>
+        <span>{windSpeedFormatter.format(windSpeed)}</span>
+      </div>
     </li>
   );
 }
@@ -76,6 +87,7 @@ export function ConnectedWeatherListItem({ location }: { location: Location }) {
   return (
     <WheatherListItem
       locationName={locationName}
+      windSpeed={data?.wind?.speed}
       currentTemperature={currentTemperature}
     />
   );
