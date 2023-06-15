@@ -5,7 +5,9 @@
 /* Make app take up full height of window */
 html,
 body,
-#root {
+#root,
+.App
+{
   height: 100%;
   min-height: 100%;
   font-family: "Barlow", "roboto", "open sans", sans-serif;

@@ -10,11 +10,6 @@ function App() {
       zipCode: undefined,
     },
     {
-      name: "Oslo",
-      coordinates: undefined,
-      zipCode: undefined,
-    },
-    {
       name: "London",
       coordinates: undefined,
       zipCode: undefined,
@@ -22,13 +17,14 @@ function App() {
   ];
 
   return (
-    <>
-      <ul>
+    <div className="px-4 pt-4 bg-gray-950 text-white App">
+      <h1 className="text-xl">Dashboard</h1>
+      <ul className="flex flex-col gap-2">
         {locations.map((location, index) => (
           <ConnectedWeatherListItem location={location} key={index} />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 
