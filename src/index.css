@@ -2,4 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Make app take up full height of window */
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
+  font-family: "Barlow", "roboto", "open sans", sans-serif;
+  font-variant-numeric: tabular-nums; /* Default to sensible numeric tabular widths */
+}
