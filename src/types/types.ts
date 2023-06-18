@@ -6,5 +6,5 @@ export type Coordinates = {
 export interface Location {
   name: string;
   coordinates: Coordinates | undefined;
-  zipCode: string | undefined;
+  zipCode: number | undefined;
 }
