@@ -1,9 +1,9 @@
-import { ConnectedWeatherListItem } from "./components/WheatherListItem.tsx";
 import { useCurrentCurrentCoordinates } from "./utils/useCurrentCoordinates.ts";
 import { Location } from "./types/types.ts";
 import { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Button } from "./components/Button.tsx";
+import { Dashboard } from "./pages/DashboardPage.tsx";
 
 function App() {
   const [selectedLocation, setSelectedLocation] = useState<
@@ -57,29 +57,6 @@ export function DetailsPage({
         <span>{location.name}</span>
       </div>
     </div>
-  );
-}
-
-export function Dashboard({
-  locations,
-  onSelectLocation,
-}: {
-  locations: Location[];
-  onSelectLocation: (location: Location) => void;
-}) {
-  return (
-    <>
-      <h1 className="text-xl">Dashboard</h1>
-      <ul className="flex flex-col gap-2">
-        {locations.map((location, index) => (
-          <ConnectedWeatherListItem
-            onClick={() => onSelectLocation(location)}
-            location={location}
-            key={index}
-          />
-        ))}
-      </ul>
-    </>
   );
 }
 
