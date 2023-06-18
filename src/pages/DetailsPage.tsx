@@ -7,7 +7,7 @@ import {
   temparatureFormatter,
   unixToLocaleTimeString,
 } from "../utils/format.ts";
-import { useCurrentWeatherDataForLocation } from "../utils/useCurrentCoordinates.ts";
+import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
 export function DetailsPage({
   location,

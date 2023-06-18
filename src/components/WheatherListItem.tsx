@@ -1,6 +1,6 @@
 import { Location } from "../types/types.ts";
 import { temparatureFormatter, windSpeedFormatter } from "../utils/format.ts";
-import { useCurrentWeatherDataForLocation } from "../utils/useCurrentCoordinates.ts";
+import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
 interface WheatherListItemProps {
   onClick: () => void;

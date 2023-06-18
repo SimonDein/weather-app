@@ -1,4 +1,4 @@
-import { useCurrentCurrentCoordinates } from "./utils/useCurrentCoordinates.ts";
+import { useCurrentCurrentCoordinates } from "./utils/hooks.ts";
 import { Location } from "./types/types.ts";
 import { useState } from "react";
 import { DashboardPage } from "./pages/DashboardPage.tsx";
