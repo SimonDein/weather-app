@@ -1,9 +1,7 @@
 import { useCurrentCurrentCoordinates } from "./utils/useCurrentCoordinates.ts";
 import { Location } from "./types/types.ts";
 import { useState } from "react";
-import { IoIosArrowRoundBack } from "react-icons/io";
-import { Button } from "./components/Button.tsx";
-import { Dashboard } from "./pages/DashboardPage.tsx";
+import { DashboardPage } from "./pages/DashboardPage.tsx";
 import { DetailsPage } from "./pages/DetailsPage.tsx";
 
 function App() {
@@ -25,7 +23,7 @@ function App() {
 
   const currentPage =
     selectedLocation === undefined ? (
-      <Dashboard
+      <DashboardPage
         locations={locations}
         onSelectLocation={(location) => setSelectedLocation(location)}
       />

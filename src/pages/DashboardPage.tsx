@@ -1,7 +1,7 @@
 import { Location } from "../types/types.ts";
 import { ConnectedWeatherListItem } from "../components/WheatherListItem.tsx";
 
-export function Dashboard({
+export function DashboardPage({
   locations,
   onSelectLocation,
 }: {
