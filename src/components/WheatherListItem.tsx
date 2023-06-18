@@ -10,13 +10,13 @@ interface WheatherListItemProps {
   windSpeed: number | undefined;
 }
 
-const temparatureFormatter = new Intl.NumberFormat("no-NO", {
+export const temparatureFormatter = new Intl.NumberFormat("no-NO", {
   style: "unit",
   unit: "celsius",
   maximumFractionDigits: 0,
 });
 
-const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
+export const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
   unit: "meter-per-second",
   maximumFractionDigits: 0,
   style: "unit",
@@ -62,7 +62,7 @@ async function getWeatherForLocation(location: Location) {
   }
 }
 
-function useCurrentWeatherDataForLocation(location: Location) {
+export function useCurrentWeatherDataForLocation(location: Location) {
   const [data, setData] = useState<CurrentResponse | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
