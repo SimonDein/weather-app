@@ -2,12 +2,12 @@ import { Location } from "../types/types.ts";
 import { Button } from "../components/Button.tsx";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { PageTitle } from "../components/PageTitle.tsx";
-import { useCurrentWeatherDataForLocation } from "../components/WheatherListItem.tsx";
 import {
   distanceFormatter,
   temparatureFormatter,
   unixToLocaleTimeString,
 } from "../utils/format.ts";
+import { useCurrentWeatherDataForLocation } from "../utils/useCurrentCoordinates.ts";
 
 export function DetailsPage({
   location,
