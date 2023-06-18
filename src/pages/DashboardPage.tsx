@@ -1,5 +1,6 @@
 import { Location } from "../types/types.ts";
 import { ConnectedWeatherListItem } from "../components/WheatherListItem.tsx";
+import { PageTitle } from "../components/PageTitle.tsx";
 
 export function DashboardPage({
   locations,
@@ -10,7 +11,7 @@ export function DashboardPage({
 }) {
   return (
     <>
-      <h1 className="text-xl">Dashboard</h1>
+      <PageTitle>Dashboard</PageTitle>
       <ul className="flex flex-col gap-2">
         {locations.map((location, index) => (
           <ConnectedWeatherListItem
