@@ -3,6 +3,7 @@ import { useCurrentCurrentCoordinates } from "./utils/useCurrentCoordinates.ts";
 import { Location } from "./types/types.ts";
 import { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { Button } from "./components/Button.tsx";
 
 function App() {
   const [selectedLocation, setSelectedLocation] = useState<
@@ -57,14 +58,6 @@ export function DetailsPage({
       </div>
     </div>
   );
-}
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
-}
-
-export function Button({ variant = "primary", ...rest }: ButtonProps) {
-  return <button {...rest}>{rest.children}</button>;
 }
 
 export function Dashboard({
