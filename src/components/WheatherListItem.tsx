@@ -1,7 +1,6 @@
 import { Location } from "../types/types.ts";
-import { useEffect, useState } from "react";
-import { openWeather } from "../utils/openWeatherAPI.ts";
-import { CurrentResponse } from "openweathermap-ts/dist/types";
+import { temparatureFormatter, windSpeedFormatter } from "../utils/format.ts";
+import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
 interface WheatherListItemProps {
   onClick: () => void;
@@ -9,18 +8,6 @@ interface WheatherListItemProps {
   currentTemperature: number;
   windSpeed: number | undefined;
 }
-
-const temparatureFormatter = new Intl.NumberFormat("no-NO", {
-  style: "unit",
-  unit: "celsius",
-  maximumFractionDigits: 0,
-});
-
-const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
-  unit: "meter-per-second",
-  maximumFractionDigits: 0,
-  style: "unit",
-});
 
 export function WheatherListItem({
   onClick,
@@ -44,47 +31,6 @@ export function WheatherListItem({
       </div>
     </li>
   );
-}
-
-async function getWeatherForLocation(location: Location) {
-  if (location.coordinates !== undefined) {
-    return openWeather.getCurrentWeatherByGeoCoordinates(
-      location.coordinates?.latitude,
-      location.coordinates?.longitude
-    );
-  }
-  if (location.zipCode !== undefined) {
-    return openWeather.getCurrentWeatherByZipcode(location.zipCode);
-  }
-
-  if (location.name !== undefined) {
-    return openWeather.getCurrentWeatherByCityName({ cityName: location.name });
-  }
-}
-
-function useCurrentWeatherDataForLocation(location: Location) {
-  const [data, setData] = useState<CurrentResponse | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  async function fetchData() {
-    try {
-      setIsLoading(true);
-      const weather = await getWeatherForLocation(location);
-      setData(weather);
-    } catch (e) {
-      console.log(e);
-      setError(e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [location]);
-
-  return { data, isLoading, error };
 }
 
 export function ConnectedWeatherListItem({

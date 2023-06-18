@@ -1,8 +1,13 @@
-import { ConnectedWeatherListItem } from "./components/WheatherListItem.tsx";
-import { useCurrentCurrentCoordinates } from "./utils/useCurrentCoordinates.ts";
+import { useCurrentCurrentCoordinates } from "./utils/hooks.ts";
 import { Location } from "./types/types.ts";
+import { useState } from "react";
+import { DashboardPage } from "./pages/DashboardPage.tsx";
+import { DetailsPage } from "./pages/DetailsPage.tsx";
 
 function App() {
+  const [selectedLocation, setSelectedLocation] = useState<
+    Location | undefined
+  >(undefined);
   const locations: Location[] = [
     {
       name: "Current location",
@@ -16,19 +21,21 @@ function App() {
     },
   ];
 
+  const currentPage =
+    selectedLocation === undefined ? (
+      <DashboardPage
+        locations={locations}
+        onSelectLocation={(location) => setSelectedLocation(location)}
+      />
+    ) : (
+      <DetailsPage
+        location={selectedLocation}
+        onBack={() => setSelectedLocation(undefined)}
+      />
+    );
+
   return (
-    <div className="px-4 pt-4 bg-gray-950 text-white App">
-      <h1 className="text-xl">Dashboard</h1>
-      <ul className="flex flex-col gap-2">
-        {locations.map((location, index) => (
-          <ConnectedWeatherListItem
-            onClick={() => console.log(locations[index])}
-            location={location}
-            key={index}
-          />
-        ))}
-      </ul>
-    </div>
+    <main className="px-4 pt-4 bg-gray-950 text-white App">{currentPage}</main>
   );
 }
 
