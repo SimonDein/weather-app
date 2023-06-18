@@ -31,16 +31,17 @@ export function DetailsPage({
     data.visibility / 1000
   );
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-full pb-4">
       <div className="flex items-center">
         <Button className="flex items-center" onClick={onBack}>
           <IoIosArrowRoundBack size={40} />
         </Button>
         <PageTitle>{location.name}</PageTitle>
       </div>
-      <div>
-        {!isLoading && (
-          <div className="flex flex-col items-center">
+
+      {!isLoading && (
+        <div className="flex flex-col justify-center sm:flex-row items-center h-full w-full">
+          <div className="flex flex-1 flex-col justify-center items-center">
             <span>{data?.weather[0].main}</span>
             <span className="text-4xl">
               {temparatureFormatter.format(data.main.temp)}
@@ -50,9 +51,11 @@ export function DetailsPage({
               <span>L: {data?.main.temp_min}</span>
               <span>H: {data?.main.temp_max}</span>
             </div>
+          </div>
 
-            <div>
-              <div className="flex border-b w-full">
+          <div className="flex flex-col flex-1 w-full justify-center">
+            <div className="aspect-square flex flex-col">
+              <div className="flex border-b h-full w-full">
                 <WeatherMetaDataTile
                   className="border-r flex-1"
                   title="Sunrise"
@@ -63,7 +66,7 @@ export function DetailsPage({
                   value={unixToLocaleTimeString(data.sys.sunset)}
                 />
               </div>
-              <div className="flex w-full">
+              <div className="flex h-full w-full">
                 <WeatherMetaDataTile
                   title="Humidity"
                   className="border-r flex-1"
@@ -77,8 +80,8 @@ export function DetailsPage({
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -93,7 +96,9 @@ export function WeatherMetaDataTile({
   className?: string;
 }) {
   return (
-    <div className={`flex flex-col items-center flex-1 p-4 ${className}`}>
+    <div
+      className={`flex flex-col justify-center items-center flex-1 p-4 ${className}`}
+    >
       <span className="whitespace-nowrap">{title}</span>
       <span className="whitespace-nowrap">{value}</span>
     </div>
