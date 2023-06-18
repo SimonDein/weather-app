@@ -2,6 +2,7 @@ import { Location } from "../types/types.ts";
 import { useEffect, useState } from "react";
 import { openWeather } from "../utils/openWeatherAPI.ts";
 import { CurrentResponse } from "openweathermap-ts/dist/types";
+import { temparatureFormatter, windSpeedFormatter } from "../utils/format.ts";
 
 interface WheatherListItemProps {
   onClick: () => void;
@@ -9,18 +10,6 @@ interface WheatherListItemProps {
   currentTemperature: number;
   windSpeed: number | undefined;
 }
-
-export const temparatureFormatter = new Intl.NumberFormat("no-NO", {
-  style: "unit",
-  unit: "celsius",
-  maximumFractionDigits: 0,
-});
-
-export const windSpeedFormatter = new Intl.NumberFormat("no-NO", {
-  unit: "meter-per-second",
-  maximumFractionDigits: 0,
-  style: "unit",
-});
 
 export function WheatherListItem({
   onClick,

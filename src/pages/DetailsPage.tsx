@@ -2,10 +2,12 @@ import { Location } from "../types/types.ts";
 import { Button } from "../components/Button.tsx";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { PageTitle } from "../components/PageTitle.tsx";
+import { useCurrentWeatherDataForLocation } from "../components/WheatherListItem.tsx";
 import {
+  distanceFormatter,
   temparatureFormatter,
-  useCurrentWeatherDataForLocation,
-} from "../components/WheatherListItem.tsx";
+  unixToLocaleTimeString,
+} from "../utils/format.ts";
 
 export function DetailsPage({
   location,
@@ -15,11 +17,6 @@ export function DetailsPage({
   onBack: () => void;
 }) {
   const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
-  const visibilityInKM = new Intl.NumberFormat("en-EN", {
-    style: "unit",
-    unit: "kilometer",
-    minimumFractionDigits: 1,
-  });
 
   if (error) {
     return <div>{error.name}</div>;
@@ -30,7 +27,9 @@ export function DetailsPage({
   }
 
   // Get the local date and time components from the Date object
-  const formattedVisibilityKM = visibilityInKM.format(data.visibility / 1000);
+  const formattedVisibilityInKM = distanceFormatter.format(
+    data.visibility / 1000
+  );
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center">
@@ -73,7 +72,7 @@ export function DetailsPage({
                 <WeatherMetaDataTile
                   className="flex-1"
                   title="Visibility"
-                  value={formattedVisibilityKM}
+                  value={formattedVisibilityInKM}
                 />
               </div>
             </div>
@@ -99,13 +98,4 @@ export function WeatherMetaDataTile({
       <span className="whitespace-nowrap">{value}</span>
     </div>
   );
-}
-
-export function unixToLocaleTimeString(unixTime: number) {
-  const date = new Date(unixTime * 1000);
-
-  return date.toLocaleTimeString("en-EN", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }
