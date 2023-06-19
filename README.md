@@ -33,3 +33,5 @@ Both successful and error states could be tested in a mocked environment, if we 
 The app is written in a functional style, with the use of React Hooks. I've tried to extract the components where i found it sensible, while iterating, though fx. `DetailsPage` should be split into smaller components fx.
 
 I didn't get around to making a rendering dynamic weather icons based on the weather data, but it should be a getter function with with a switch or an object lookup.
+
+I originally intended to write all the components in Storybook to isolate the UI development from the app itself, but due to time constraints i dwelled away from it.
