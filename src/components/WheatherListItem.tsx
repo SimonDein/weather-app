@@ -2,6 +2,7 @@ import { Location } from "../types/types.ts";
 import { temparatureFormatter } from "../utils/format.ts";
 import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
+// Handles the connection to any fetching of data
 export function ConnectedWeatherListItem({
   location,
   onClick,
@@ -39,6 +40,7 @@ interface WheatherListItemProps {
   currentTemperature: number;
 }
 
+// Purely presentational. This would be nice to fx. use for mocking and to showcase different states in Storybook.
 export function WheatherListItem({
   disabled,
   onClick,
