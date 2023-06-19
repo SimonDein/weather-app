@@ -25,7 +25,7 @@ function App() {
     selectedLocation === undefined ? (
       <DashboardPage
         locations={locations}
-        onSelectLocation={(location) => setSelectedLocation(location)}
+        onSelectLocation={(location: Location) => setSelectedLocation(location)}
       />
     ) : (
       <DetailsPage
@@ -35,7 +35,7 @@ function App() {
     );
 
   return (
-    <main className="px-4 pt-4 bg-gray-950 text-white App">{currentPage}</main>
+    <main className="px-4 pt-4 bg-slate-950 text-white App">{currentPage}</main>
   );
 }
 
