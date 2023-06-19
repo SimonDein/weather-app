@@ -66,19 +66,16 @@ export function DetailsPage({
             <div className="flex h-full w-full gap-4">
               <WeatherMetaDataTile
                 className="flex-1"
-                title="Sunrise"
                 icon={<BsSunrise size={40} />}
                 value={unixToLocaleTimeString(data.sys.sunrise)}
               />
               <WeatherMetaDataTile
-                title="Sunset"
                 icon={<BsSunset size={40} />}
                 value={unixToLocaleTimeString(data.sys.sunset)}
               />
             </div>
             <div className="flex h-full w-full gap-4">
               <WeatherMetaDataTile
-                title="Humidity"
                 icon={<WiHumidity size={40} />}
                 className="flex-1"
                 value={`${data.main.humidity}%`}
@@ -86,7 +83,6 @@ export function DetailsPage({
               <WeatherMetaDataTile
                 className="flex-1"
                 icon={<MdOutlineVisibility size={40} />}
-                title="Visibility"
                 value={formattedVisibilityInKM}
               />
             </div>
@@ -98,12 +94,10 @@ export function DetailsPage({
 }
 
 export function WeatherMetaDataTile({
-  title,
   value,
   icon,
   className,
 }: {
-  title: string;
   value: number | string;
   icon: React.ReactNode;
   className?: string;
