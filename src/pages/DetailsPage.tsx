@@ -44,7 +44,7 @@ export function DetailsPage({
   );
 
   return (
-    <div className="flex flex-col relative items-center h-full pb-4 gap-6">
+    <div className="flex flex-col relative items-center h-full pb-4 gap-4">
       <div>
         <Button className="absolute top-0 left-0 items-center" onClick={onBack}>
           <IoIosArrowRoundBack size={40} />
