@@ -35,7 +35,7 @@ function App() {
     );
 
   return (
-    <main className="px-4 pt-4 bg-gray-950 text-white App">{currentPage}</main>
+    <main className="px-4 pt-4 bg-slate-950 text-white App">{currentPage}</main>
   );
 }
 

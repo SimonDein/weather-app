@@ -3,6 +3,7 @@ import { temparatureFormatter, windSpeedFormatter } from "../utils/format.ts";
 import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
 interface WheatherListItemProps {
+  disabled: boolean;
   onClick: () => void;
   locationName: string;
   currentTemperature: number;
@@ -10,6 +11,7 @@ interface WheatherListItemProps {
 }
 
 export function WheatherListItem({
+  disabled,
   onClick,
   locationName,
   currentTemperature,
@@ -21,8 +23,8 @@ export function WheatherListItem({
 
   return (
     <li
-      className="flex px-2 py-4 bg-slate-900 rounded-md justify-between"
-      onClick={onClick}
+      className="flex px-2 py-4 bg-cyan-950 rounded-md justify-between"
+      onClick={!disabled ? onClick : undefined}
     >
       <span>{locationName}</span>
       <div className="flex flex-col">
@@ -40,13 +42,17 @@ export function ConnectedWeatherListItem({
   location: Location;
   onClick: () => void;
 }) {
-  const { data } = useCurrentWeatherDataForLocation(location);
+  console.log(location);
+  const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
   console.log(data);
+  const isNoDataPresent = !data && !isLoading;
+  console.log(isNoDataPresent);
   const currentTemperature = data?.main?.temp ?? 0;
   const locationName = data?.name ?? location.name ?? "Unknown location";
 
   return (
     <WheatherListItem
+      disabled={isNoDataPresent}
       onClick={onClick}
       locationName={locationName}
       windSpeed={data?.wind?.speed}
