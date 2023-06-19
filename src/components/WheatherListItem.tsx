@@ -10,6 +10,31 @@ interface WheatherListItemProps {
   currentTemperature: number;
 }
 
+export function ConnectedWeatherListItem({
+  location,
+  onClick,
+}: {
+  location: Location;
+  onClick: () => void;
+}) {
+  console.log(location);
+  const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
+  const isNoDataPresent = !data && !isLoading;
+  console.log(isNoDataPresent);
+  const currentTemperature = data?.main?.temp ?? 0;
+  const locationName = data?.name ?? location.name ?? "Unknown location";
+
+  return (
+    <WheatherListItem
+      disabled={isNoDataPresent || error !== undefined}
+      onClick={onClick}
+      error={error}
+      locationName={locationName}
+      currentTemperature={currentTemperature}
+    />
+  );
+}
+
 export function WheatherListItem({
   disabled,
   onClick,
@@ -33,30 +58,5 @@ export function WheatherListItem({
       <span>{locationName}</span>
       <div className="flex flex-col">{content}</div>
     </li>
-  );
-}
-
-export function ConnectedWeatherListItem({
-  location,
-  onClick,
-}: {
-  location: Location;
-  onClick: () => void;
-}) {
-  console.log(location);
-  const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
-  const isNoDataPresent = !data && !isLoading;
-  console.log(isNoDataPresent);
-  const currentTemperature = data?.main?.temp ?? 0;
-  const locationName = data?.name ?? location.name ?? "Unknown location";
-
-  return (
-    <WheatherListItem
-      disabled={isNoDataPresent || error !== undefined}
-      onClick={onClick}
-      error={error}
-      locationName={locationName}
-      currentTemperature={currentTemperature}
-    />
   );
 }
