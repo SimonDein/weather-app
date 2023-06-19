@@ -50,6 +50,7 @@ function useCurrentWeatherDataForLocation(location: Location) {
       setData(weather);
     } catch (e) {
       console.log(e);
+      // @ts-ignore - unknown error type
       setError(e);
     } finally {
       setIsLoading(false);
