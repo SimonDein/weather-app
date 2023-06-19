@@ -1,8 +1,8 @@
-import { useCurrentCurrentCoordinates } from "./utils/hooks.ts";
 import { Location } from "./types/types.ts";
 import { useState } from "react";
 import { DashboardPage } from "./pages/DashboardPage.tsx";
 import { DetailsPage } from "./pages/DetailsPage.tsx";
+import { useCurrentCurrentCoordinates } from "./utils/hooks.ts";
 
 function App() {
   const [selectedLocation, setSelectedLocation] = useState<

@@ -43,7 +43,7 @@ export function ConnectedWeatherListItem({
   onClick: () => void;
 }) {
   console.log(location);
-  const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
+  const { data, isLoading } = useCurrentWeatherDataForLocation(location);
   console.log(data);
   const isNoDataPresent = !data && !isLoading;
   console.log(isNoDataPresent);
