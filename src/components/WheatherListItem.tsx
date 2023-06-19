@@ -13,7 +13,7 @@ export function ConnectedWeatherListItem({
   const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
   const isNoDataPresent = !data && !isLoading;
   const currentTemperature = data?.main?.temp ?? 0;
-  const locationName = data?.name ?? location.name ?? "Unknown location";
+  const locationName = location.name ?? data?.name ?? "Unknown location";
 
   if (isLoading) {
     // Return fx. a loading skeleton

@@ -10,7 +10,7 @@ function App() {
   >(undefined);
   const locations: Location[] = [
     {
-      name: "Current location",
+      name: "My location",
       coordinates: useCurrentCurrentCoordinates(),
       zipCode: undefined,
     },
