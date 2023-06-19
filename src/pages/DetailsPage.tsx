@@ -22,6 +22,10 @@ export function DetailsPage({
 }) {
   const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
 
+  if (isLoading) {
+    return null; // Here we display something nicer, like fx. a loading skeleton
+  }
+
   if (error) {
     return <div>{error.name}</div>;
   }

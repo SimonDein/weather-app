@@ -2,14 +2,6 @@ import { Location } from "../types/types.ts";
 import { temparatureFormatter } from "../utils/format.ts";
 import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
-interface WheatherListItemProps {
-  disabled: boolean;
-  onClick: () => void;
-  error: Error | undefined;
-  locationName: string;
-  currentTemperature: number;
-}
-
 export function ConnectedWeatherListItem({
   location,
   onClick,
@@ -24,6 +16,10 @@ export function ConnectedWeatherListItem({
   const currentTemperature = data?.main?.temp ?? 0;
   const locationName = data?.name ?? location.name ?? "Unknown location";
 
+  if (isLoading) {
+    // Return fx. a loading skeleton
+  }
+
   return (
     <WheatherListItem
       disabled={isNoDataPresent || error !== undefined}
@@ -33,6 +29,14 @@ export function ConnectedWeatherListItem({
       currentTemperature={currentTemperature}
     />
   );
+}
+
+interface WheatherListItemProps {
+  disabled: boolean;
+  onClick: () => void;
+  error: Error | undefined;
+  locationName: string;
+  currentTemperature: number;
 }
 
 export function WheatherListItem({
