@@ -1,5 +1,5 @@
 # Weather App showcase
-The app is run by `npm run dev` and exists on `http://127.0.0.1:5173/`
+The app can be run by command `npm run dev` and exists on `http://127.0.0.1:5173/`
 
 ## Frameworks and libraries
 The project is a **React** (for web) app, written in **Typscript**, and running on a **Vite** server.
