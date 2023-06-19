@@ -1,25 +1,29 @@
 import { Location } from "../types/types.ts";
-import { temparatureFormatter, windSpeedFormatter } from "../utils/format.ts";
+import { temparatureFormatter } from "../utils/format.ts";
 import { useCurrentWeatherDataForLocation } from "../utils/hooks.ts";
 
 interface WheatherListItemProps {
   disabled: boolean;
   onClick: () => void;
+  error: Error | undefined;
   locationName: string;
   currentTemperature: number;
-  windSpeed: number | undefined;
 }
 
 export function WheatherListItem({
   disabled,
   onClick,
+  error,
   locationName,
   currentTemperature,
-  windSpeed,
 }: WheatherListItemProps) {
-  const formattedWindSpeed = windSpeed
-    ? windSpeedFormatter.format(windSpeed)
-    : "/";
+  const content = error ? (
+    <span className="text-gray-400">{error.message}</span>
+  ) : (
+    <>
+      <span>{temparatureFormatter.format(currentTemperature)}</span>
+    </>
+  );
 
   return (
     <li
@@ -27,10 +31,7 @@ export function WheatherListItem({
       onClick={!disabled ? onClick : undefined}
     >
       <span>{locationName}</span>
-      <div className="flex flex-col">
-        <span>{temparatureFormatter.format(currentTemperature)}</span>
-        <span>{formattedWindSpeed}</span>
-      </div>
+      <div className="flex flex-col">{content}</div>
     </li>
   );
 }
@@ -43,8 +44,7 @@ export function ConnectedWeatherListItem({
   onClick: () => void;
 }) {
   console.log(location);
-  const { data, isLoading } = useCurrentWeatherDataForLocation(location);
-  console.log(data);
+  const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
   const isNoDataPresent = !data && !isLoading;
   console.log(isNoDataPresent);
   const currentTemperature = data?.main?.temp ?? 0;
@@ -52,10 +52,10 @@ export function ConnectedWeatherListItem({
 
   return (
     <WheatherListItem
-      disabled={isNoDataPresent}
+      disabled={isNoDataPresent || error !== undefined}
       onClick={onClick}
+      error={error}
       locationName={locationName}
-      windSpeed={data?.wind?.speed}
       currentTemperature={currentTemperature}
     />
   );

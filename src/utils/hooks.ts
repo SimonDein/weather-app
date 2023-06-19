@@ -41,17 +41,23 @@ async function getWeatherForLocation(location: Location) {
 function useCurrentWeatherDataForLocation(location: Location) {
   const [data, setData] = useState<CurrentResponse | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   async function fetchData() {
     try {
+      // Reset error state on retry
+      setError(undefined);
       setIsLoading(true);
       const weather = await getWeatherForLocation(location);
+
+      if (weather?.main === undefined) {
+        throw new Error("No weather data found");
+      }
+
       setData(weather);
-    } catch (e) {
-      console.log(e);
-      // @ts-ignore - unknown error type
-      setError(e);
+    } catch (error) {
+      console.log(error);
+      setError(error);
     } finally {
       setIsLoading(false);
     }
