@@ -10,7 +10,7 @@ export function DashboardPage({
   onSelectLocation: (location: Location) => void;
 }) {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <PageTitle>Dashboard</PageTitle>
       <ul className="flex flex-col gap-2">
         {locations.map((location, index) => (
@@ -21,6 +21,6 @@ export function DashboardPage({
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
