@@ -15,7 +15,12 @@ function App() {
       zipCode: undefined,
     },
     {
-      name: "Nuuk",
+      name: "London",
+      coordinates: undefined,
+      zipCode: undefined,
+    },
+    {
+      name: "Berlin",
       coordinates: undefined,
       zipCode: undefined,
     },
