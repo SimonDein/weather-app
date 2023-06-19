@@ -50,7 +50,7 @@ function useCurrentWeatherDataForLocation(location: Location) {
       setIsLoading(true);
       const weather = await getWeatherForLocation(location);
 
-      if (weather?.main === undefined) {
+      if (weather === undefined || weather?.main === undefined) {
         throw new Error("No weather data found");
       }
 
