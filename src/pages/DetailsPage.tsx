@@ -23,7 +23,7 @@ export function DetailsPage({
   const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
 
   if (isLoading) {
-    return null; // Here we display something nicer, like fx. a loading skeleton
+    return null; // We could use this flag to fx. display some nice loading animation
   }
 
   if (error) {
