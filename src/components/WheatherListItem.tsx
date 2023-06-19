@@ -10,10 +10,8 @@ export function ConnectedWeatherListItem({
   location: Location;
   onClick: () => void;
 }) {
-  console.log(location);
   const { data, isLoading, error } = useCurrentWeatherDataForLocation(location);
   const isNoDataPresent = !data && !isLoading;
-  console.log(isNoDataPresent);
   const currentTemperature = data?.main?.temp ?? 0;
   const locationName = data?.name ?? location.name ?? "Unknown location";
 
