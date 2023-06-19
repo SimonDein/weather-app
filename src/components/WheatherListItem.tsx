@@ -50,16 +50,18 @@ export function WheatherListItem({
     <span className="text-gray-400">{error.message}</span>
   ) : (
     <>
-      <span>{temparatureFormatter.format(currentTemperature)}</span>
+      <span className="text-lg">
+        {temparatureFormatter.format(currentTemperature)}
+      </span>
     </>
   );
 
   return (
     <li
-      className="flex px-2 py-4 bg-cyan-950 rounded-md justify-between"
+      className="flex px-4 py-6 bg-cyan-950 rounded-md justify-between"
       onClick={!disabled ? onClick : undefined}
     >
-      <span>{locationName}</span>
+      <span className="text-lg font-semibold">{locationName}</span>
       <div className="flex flex-col">{content}</div>
     </li>
   );
