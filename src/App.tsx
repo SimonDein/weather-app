@@ -25,7 +25,7 @@ function App() {
     selectedLocation === undefined ? (
       <DashboardPage
         locations={locations}
-        onSelectLocation={(location) => setSelectedLocation(location)}
+        onSelectLocation={(location: Location) => setSelectedLocation(location)}
       />
     ) : (
       <DetailsPage
