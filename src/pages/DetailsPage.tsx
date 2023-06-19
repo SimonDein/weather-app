@@ -27,13 +27,18 @@ export function DetailsPage({
   }
 
   if (!data) {
-    return null; // TODO: Handle missing data
+    return (
+      <span>
+        Something unexpected happened. Please contact supports if this is a
+        recurring issue.
+      </span>
+    );
   }
 
-  // Get the local date and time components from the Date object
   const formattedVisibilityInKM = distanceFormatter.format(
     data.visibility / 1000
   );
+
   return (
     <div className="flex flex-col relative items-center h-full pb-4 gap-6">
       <div>
