@@ -24,7 +24,7 @@ The idea was that at some point i could allow a user to enter any of the three, 
 1. Happy paths: On expected successful calls by coordinates, city name or zip code, i would fx. expect a successful response and maybe in a certain format.
 2. Sad paths: Certain errors was not treated by the API as expected, i would fx. expect 404's to throw an error and not return a successful response. Some tests expecting certain error scenarios would be very helpful to ensure the integration with the API is working as expected.
 
-Some E2E tests in Playwright would be really nice as well, and could work will in a CI/CD environment, to fx. ensure you're not releasing a broken app.
+Some E2E tests in Playwright would be really nice as well, and could work well in a CI/CD environment, to fx. ensure you're not releasing a broken app.
 Some tests, navigating through the app, clicking around, interacting with the app, and ensuring the expected UI elements are present when they do.
 Both successful and error states could be tested in a mocked environment, if we would want to isolate just the front-end.
 
@@ -32,6 +32,8 @@ Both successful and error states could be tested in a mocked environment, if we 
 ## Some notes
 The app is written in a functional style, with the use of React Hooks. I've tried to extract the components where i found it sensible, while iterating, though fx. `DetailsPage` should be split into smaller components fx.
 
-I didn't get around to making a rendering dynamic weather icons based on the weather data, but it should be a getter function with with a switch or an object lookup.
+The API is "public" in this project, and should generally never be done on any real project. In this case we make requests to Open Weather Map directly and the key is included in the query params directly, so there's really no point in trying to hide it for this showcase project. Instead it should be shared by other means, fx. as environment variables to the back-end server, that we would instead request from the front-end. The API key itself could be saved to fx. a password manager (or other protected isolated service) shared between team members.
+
+I didn't get around to making a rendering dynamic weather icons based on the weather data, but it could be a getter function that uses an object lookup, based on the short weather desription from OWM, with keys for the the descriptions and icons (or icon names) for values.
 
 I originally intended to write all the components in Storybook to isolate the UI development from the app itself, but due to time constraints i dwelled away from it.
