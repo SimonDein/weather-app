@@ -1,5 +1,5 @@
 import { Location } from "../types/types.ts";
-import { ConnectedWeatherListItem } from "../components/WheatherListItem.tsx";
+import { ConnectedWeatherListItem } from "../components/WeatherListItem.tsx";
 import { PageTitle } from "../components/PageTitle.tsx";
 
 export function DashboardPage({

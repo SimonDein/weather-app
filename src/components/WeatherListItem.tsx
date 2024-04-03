@@ -20,7 +20,7 @@ export function ConnectedWeatherListItem({
   }
 
   return (
-    <WheatherListItem
+    <WeatherListItem
       disabled={isNoDataPresent || error !== undefined}
       onClick={onClick}
       error={error}
@@ -30,7 +30,7 @@ export function ConnectedWeatherListItem({
   );
 }
 
-interface WheatherListItemProps {
+interface WeatherListItemProps {
   disabled: boolean;
   onClick: () => void;
   error: Error | undefined;
@@ -39,13 +39,13 @@ interface WheatherListItemProps {
 }
 
 // Purely presentational. This would be nice to fx. use for mocking and to showcase different states in Storybook.
-export function WheatherListItem({
+export function WeatherListItem({
   disabled,
   onClick,
   error,
   locationName,
   currentTemperature,
-}: WheatherListItemProps) {
+}: WeatherListItemProps) {
   const content = error ? (
     <span className="text-gray-400">{error.message}</span>
   ) : (
